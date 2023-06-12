@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 public class ForeignDebt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "foreigndebt_seq_id",sequenceName = "foreigndebt_seq_id",allocationSize = 1)
+
     @Column(name = ("foreigndebt_id"))
     private Integer foreignDebtId;
     private String companyName;

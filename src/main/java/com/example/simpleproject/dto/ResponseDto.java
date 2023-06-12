@@ -10,6 +10,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseDto<T> {
     private boolean success;

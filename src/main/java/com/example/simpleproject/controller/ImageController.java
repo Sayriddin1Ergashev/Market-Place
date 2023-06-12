@@ -4,7 +4,10 @@ import com.example.simpleproject.dto.ImageDto;
 import com.example.simpleproject.dto.ResponseDto;
 import com.example.simpleproject.service.ImageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 
 @RestController
@@ -25,7 +28,8 @@ private final ImageService imageService;
 }
 
 @PutMapping(value = ("/update/{id}"))
-    public ResponseDto<ImageDto>updateImage(@PathVariable("id") Integer imageId, @RequestBody ImageDto dto){
+    public ResponseDto<ImageDto>updateImage(@PathVariable("id") Integer imageId,
+                                            @RequestBody ImageDto dto){
 return imageService.updateImage(imageId,dto);
 }
 
@@ -33,5 +37,12 @@ return imageService.updateImage(imageId,dto);
     public ResponseDto<ImageDto>deleteImage(@PathVariable("id") Integer imageId){
     return imageService.deleteImage(imageId);
 }
+
+    @GetMapping(value = ("/get-advanced-search"))
+    public ResponseDto<Page<ImageDto>> getAdvancedSearch(@RequestParam Map<String,String> params) {
+        return imageService.getAdvancedSearch(params);
+    }
+
+
 
 }

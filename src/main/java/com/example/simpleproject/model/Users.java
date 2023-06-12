@@ -15,6 +15,8 @@ import java.util.Arrays;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "users_seq_id",sequenceName = "users_seq_id",allocationSize = 1)
+
     private Integer usersId;
     private String firstName;
     private String lastName;

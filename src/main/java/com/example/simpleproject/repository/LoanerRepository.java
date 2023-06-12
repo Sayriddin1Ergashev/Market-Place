@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface LoanerRepository extends JpaRepository<Loaner, Integer> {
 
-    //Optional<Users> findByLoanerIdAndDeletedAtIsNull(Integer userId);
+    Optional<Loaner> findByLoanerIdAndDeletedAtIsNull(Integer loanerId);
 }

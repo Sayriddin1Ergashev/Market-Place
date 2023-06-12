@@ -15,7 +15,7 @@ import java.util.Map;
 @Repository
 @RequiredArgsConstructor
 public class UsersrepositoryImpl {
-    protected final EntityManager entityManager;
+    protected  EntityManager entityManager;
 
     public Page<Users> getAdvancedSearch(Map<String, String> params) {
         int size = 10, page = 0;

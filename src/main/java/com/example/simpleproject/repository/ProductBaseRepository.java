@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface ProductBaseRepository extends JpaRepository<ProductBase, Integer> {
 
-    //Optional<Users> findByProductBaseIdAndDeletedAtIsNull(Integer userId);
+    Optional<ProductBase> findByProductBaseIdAndDeletedAtIsNull(Integer productBaseId);
 }

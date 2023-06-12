@@ -39,7 +39,7 @@ public class ExceptionHandlerResource {
                 ResponseDto.<Void>builder()
                         .message("Validation error")
                         .code(-2)
-                        // .errors(errors)
+                        // .error(errors)
                         .build()
         );
     }

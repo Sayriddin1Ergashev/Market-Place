@@ -16,7 +16,8 @@ import java.util.List;
 public class Employees {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-            @Column(name = "employees_id")
+    @SequenceGenerator(name = "mployees_seq_id",sequenceName = "mployees_seq_id",allocationSize = 1)
+    @Column(name = "employees_id")
     private Integer employeesId;
     @Column(name = "created-at")
     private LocalDateTime createdAt;

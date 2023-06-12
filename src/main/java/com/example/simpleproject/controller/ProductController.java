@@ -5,11 +5,14 @@ import com.example.simpleproject.dto.ProductDto;
 import com.example.simpleproject.dto.ResponseDto;
 import com.example.simpleproject.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 
 @RestController
-@RequestMapping("product")
+@RequestMapping(value = "product")
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
@@ -35,6 +38,11 @@ public class ProductController {
     public ResponseDto<ProductDto>deleteProduct(@PathVariable("id") Integer productId){
         return productService.deleteProduct(productId);
 }
+
+    @GetMapping(value = ("/get-advanced-search"))
+    public ResponseDto<Page<ProductDto>> getAdvancedSearch(@RequestParam Map<String,String> params) {
+        return productService.getAdvancedSearch(params);
+    }
 
 
 }

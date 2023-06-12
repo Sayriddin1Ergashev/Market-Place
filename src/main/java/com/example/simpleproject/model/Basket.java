@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class Basket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = (""))
+    @SequenceGenerator(name = "basket_seq_id",sequenceName = "basket_seq_id",allocationSize = 1)
     private Integer basketId;
     private Integer productId;
     private Double prodMass;

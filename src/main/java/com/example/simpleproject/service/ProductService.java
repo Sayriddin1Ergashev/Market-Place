@@ -3,16 +3,20 @@ package com.example.simpleproject.service;
 import com.example.simpleproject.dto.ErrorDto;
 import com.example.simpleproject.dto.ProductDto;
 import com.example.simpleproject.dto.ResponseDto;
+import com.example.simpleproject.dto.UsersDto;
 import com.example.simpleproject.model.Product;
 import com.example.simpleproject.repository.ProductRepository;
+import com.example.simpleproject.repository.ProductRepositoryImpl;
 import com.example.simpleproject.service.mapper.ProductMapper;
 import com.example.simpleproject.service.validation.ProductValidate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -23,6 +27,7 @@ public class ProductService {
     private final ProductMapper productMapper;
     private final ProductRepository productRepository;
     private final ProductValidate productValidate;
+    private final ProductRepositoryImpl productRepositoryImpl;
 
     public ResponseDto<ProductDto> createProduct(ProductDto dto) {
         List<ErrorDto> errors = ProductValidate.validate(dto);
@@ -126,4 +131,22 @@ Optional<Product>optional=productRepository.findByProductIdAndDeletedAtIsNull(pr
                     .build();
         }
     }
+
+    public ResponseDto<Page<ProductDto>> getAdvancedSearch(Map<String, String> params) {
+        Page<ProductDto> product = this.productRepositoryImpl.getAdvancedSearch(params)
+                .map(this.productMapper::toDto);
+        if (product.isEmpty()) {
+            return ResponseDto.<Page<ProductDto>>builder()
+                    .message("Product is not found")
+                    .code(-1)
+                    .build();
+        }
+        return ResponseDto.<Page<ProductDto>>builder()
+                .success(true)
+                .message("Ok")
+                .data(product)
+                .build();
+    }
+
+
 }

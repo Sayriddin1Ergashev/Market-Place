@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 public class Loaner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "loaner_seq_id",sequenceName = "loaner_seq_id",allocationSize = 1)
+
     @Column(name = ("loaner_id"))
     private Integer loanerId;
     private Double totalPrice;

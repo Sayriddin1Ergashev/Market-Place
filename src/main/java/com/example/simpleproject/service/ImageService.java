@@ -5,14 +5,17 @@ import com.example.simpleproject.dto.ImageDto;
 import com.example.simpleproject.dto.ResponseDto;
 import com.example.simpleproject.model.Image;
 import com.example.simpleproject.repository.ImageRepository;
+import com.example.simpleproject.repository.ImageRepositoryImpl;
 import com.example.simpleproject.service.mapper.ImageMapper;
 import com.example.simpleproject.service.validation.ImageValidate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -23,6 +26,7 @@ public class ImageService {
     private final ImageMapper imageMapper;
     private final ImageRepository imageRepository;
     private final ImageValidate imageValidate;
+    private final ImageRepositoryImpl imageRepositoryImpl;
     public ResponseDto<ImageDto> createImage(ImageDto dto) {
         List<ErrorDto> errors = imageValidate.validate(dto);
             if (!errors.isEmpty()){
@@ -135,4 +139,36 @@ public class ImageService {
     }
 
 
+    public ResponseDto<Page<ImageDto>> getAdvancedSearch(Map<String, String> params) {
+        Page<ImageDto> image = this.imageRepositoryImpl.getAdvancedSearch(params)
+                .map(this.imageMapper::toDto);
+        if (image.isEmpty()) {
+            return ResponseDto.<Page<ImageDto>>builder()
+                    .message("Image is not found")
+                    .code(-1)
+                    .build();
+        }
+        return ResponseDto.<Page<ImageDto>>builder()
+                .success(true)
+                .message("Ok")
+                .data(image)
+                .build();
+    }
+
+    /*
+    public ResponseDto<Page<UsersDto>> getAdvancedSearch(Map<String, String> params) {
+        Page<UsersDto> users = this.usersRepositoryImpl.getAdvancedSearch(params)
+                .map(this.usersMapper::toDto);
+        if (users.isEmpty()) {
+            return ResponseDto.<Page<UsersDto>>builder()
+                    .message("Users is not found")
+                    .code(-1)
+                    .build();
+        }
+        return ResponseDto.<Page<UsersDto>>builder()
+                .success(true)
+                .message("Ok")
+                .data(users)
+                .build();
+     */
 }

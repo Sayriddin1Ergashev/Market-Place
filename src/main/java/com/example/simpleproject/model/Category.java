@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "category_seq_id",sequenceName = "category_seq_id",allocationSize = 1)
     private Integer categoryId;
     private String categoryName;
     private Integer productId;

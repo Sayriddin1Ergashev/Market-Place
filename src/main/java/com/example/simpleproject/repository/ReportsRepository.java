@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 @Repository
 public interface ReportsRepository extends JpaRepository<Reports, Integer> {
-   // Optional<Users> findByReportsIdAndDeletedAtIsNull(Integer userId);
+   Optional<Reports> findByReportsIdAndDeletedAtIsNull(Integer reportsId);
 }

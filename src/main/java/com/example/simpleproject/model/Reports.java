@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 public class Reports {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "reports_seq_id",sequenceName = "reports_seq_id",allocationSize = 1)
+
     private Integer reportsId;
     private Integer categoryId;
     private String prodName;

@@ -16,10 +16,6 @@ public class ImageValidate {
     private final ImageRepository imageRepository;
     public List<ErrorDto> validate(ImageDto dto) {
         List<ErrorDto> errors = new ArrayList<>();
-       /* if (usersService.getImage(dto.getUsersId()).getData() == null){
-            errors.add(new ErrorsDto("usersId", "Users is not found!"));
-        }*/
-
         if (imageRepository.existsByPath(dto.getPath())){
             errors.add(new ErrorDto("path","Path already exist."));
         }
@@ -33,6 +29,8 @@ public class ImageValidate {
             errors.add(new ErrorDto("token","Token already exist."));
         }
         return errors;
+
     }
+
 
 }
